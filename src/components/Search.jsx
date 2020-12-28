@@ -34,12 +34,22 @@ export const Search = ({ submitCallback }) => {
     const newPokemon = await getPokemonByName(query)
 
     submitCallback(newPokemon)
+    setQuery('')
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" id="name" value={query} placeholder="Deoxys" onChange={handleChange} />
-      <button type="submit">Search</button>
+    <form onSubmit={handleSubmit} className="flex">
+      <input
+        className="flex-1 appearance-none border border-transparent w-full py-1 px-2 bg-white text-gray-700 placeholder-gray-400 rounded text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+        type="text"
+        id="name"
+        value={query}
+        placeholder="Deoxys"
+        onChange={handleChange}
+      />
+      <button type="submit">
+        <i data-feather="search" />
+      </button>
     </form>
   )
 }

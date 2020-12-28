@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Search, Pokemon } from './components'
-import './App.css'
+import { Switch, Route } from 'react-router-dom'
+import { Pokemon, Header, Footer, Moves, BasicInfo } from './components'
 import { getPokemonById } from './api'
 
 /**
@@ -11,6 +11,9 @@ import { getPokemonById } from './api'
 export const App = () => {
   const [initialSearch, setInitialSearch] = useState(false)
   const [currentPokemon, setCurrentPokemon] = useState({})
+
+  // const { abilities, height, heldItems, sprites, stats } = currentPokemon
+  const { moves, name, id, types } = currentPokemon
 
   /**
    * Updates the currentPokemon state
@@ -39,12 +42,26 @@ export const App = () => {
   }, [initialSearch])
 
   return (
-    <div className="App">
-      <h1>Warlock Dex</h1>
-      <h2>Search for a Pokemon!</h2>
-
-      <Search submitCallback={updateCurrentPokemon} />
-      <Pokemon pokemon={currentPokemon} />
+    <div className="relative">
+      <Header submitCallback={updateCurrentPokemon} />
+      <Switch>
+        <Route exact path="/info">
+          <BasicInfo name={name} id={id} types={types} />
+        </Route>
+        <Route exact path="/moves">
+          <Moves moves={moves} />
+        </Route>
+        <Route exact path="/">
+          <Pokemon pokemon={currentPokemon} />
+        </Route>
+        <Route exact path="/locations">
+          <Pokemon pokemon={currentPokemon} />
+        </Route>
+        <Route>
+          <h1>404</h1>
+        </Route>
+      </Switch>
+      <Footer />
     </div>
   )
 }

@@ -11,23 +11,11 @@ import PropTypes from 'prop-types'
 export const Pokemon = ({ pokemon }) => {
   console.dir(pokemon)
 
-  const { abilities, name, moves, height, heldItems, sprites, types, id, stats } = pokemon
+  const { abilities, height, heldItems, sprites, stats } = pokemon
 
   return (
     <div>
-      <h3>{name || 'Pokemon'}</h3>
       <p>Height: {height || 'Unknown'}</p>
-      <p>Number: {id || 'Unknown'}</p>
-      {!!(types || []).length && (
-        <div>
-          <h4>Types!</h4>
-          {types.map(({ type }) => (
-            <div key={type?.name}>
-              <h5>{type?.name}</h5>
-            </div>
-          ))}
-        </div>
-      )}
       {!!(stats || []).length &&
         stats.map(({ baseStat, effort, stat }) => (
           <div key={`${baseStat}/${effort}/${stat}`}>
@@ -82,16 +70,6 @@ export const Pokemon = ({ pokemon }) => {
                 {abilityStat.ability?.name}
                 {abilityStat?.is_hidden && ` (Hidden)`}
               </h5>
-            </div>
-          ))}
-        </div>
-      )}
-      {!!(moves || []).length && (
-        <div>
-          <h4>Moves!</h4>
-          {moves.map(({ move }) => (
-            <div key={move?.name}>
-              <h5>{move?.name}</h5>
             </div>
           ))}
         </div>
