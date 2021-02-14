@@ -11,10 +11,32 @@ import PropTypes from 'prop-types'
 export const Pokemon = ({ pokemon }) => {
   console.dir(pokemon)
 
-  const { abilities, height, heldItems, sprites, stats } = pokemon
+  const { abilities, height, heldItems, sprites, stats, name, id, types } = pokemon
+
+  const officialArt = sprites?.other?.officialArtwork?.frontDefault
 
   return (
     <div>
+      <div className="grid grid-cols-3 gap-2">
+        <div className="col-span-2 flex-column">
+          <p className="text-3xl font-bold uppercase">#{id}</p>
+          <p className="text-4xl font-bold uppercase">{name}</p>
+          <div className="flex">
+            {(types || []).map(({ type }) => (
+              <div
+                className={`uppercase bg-white rounded-full px-4 w-${
+                  types.length > 1 ? '28' : '56'
+                } mr-2 text-center border border-black`}
+              >
+                {type.name}
+              </div>
+            ))}
+          </div>
+        </div>
+        <figure className="w-80 h-80 bg-white shadow-md border border-black rounded justify-self-end">
+          <img className="w-full h-full" src={officialArt} alt={`Official Artwork for ${name}`} />
+        </figure>
+      </div>
       <p>Height: {height || 'Unknown'}</p>
       {!!(stats || []).length &&
         stats.map(({ baseStat, effort, stat }) => (
@@ -25,25 +47,13 @@ export const Pokemon = ({ pokemon }) => {
         ))}
       {!!(Object.entries(sprites || {}) || []).length && (
         <div>
-          <h4>Sprites!</h4>
           {Object.entries(sprites || {}).map(
             ([imgName, imgUrl]) =>
               imgName &&
               imgUrl && (
                 <div key={imgName}>
                   <h5>{imgName}</h5>
-                  {imgName !== 'other' ? (
-                    <img src={imgUrl} alt={imgName} />
-                  ) : (
-                    Object.entries(imgUrl || {}).map(([otherName, otherUrl]) => (
-                      <div>
-                        <h6>{otherName}</h6>
-                        {Object.entries(otherUrl || {}).map(([whatName, whatUrl]) => (
-                          <img src={whatUrl} alt={whatName} />
-                        ))}
-                      </div>
-                    ))
-                  )}
+                  {imgName !== 'other' && <img src={imgUrl} alt={imgName} />}
                 </div>
               ),
           )}

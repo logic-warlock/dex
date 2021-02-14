@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Pokemon, Header, Footer, Moves, BasicInfo } from './components'
+import { Pokemon, Header, Moves, BasicInfo, Page } from './components'
 import { getPokemonById } from './api'
 
 /**
@@ -44,24 +44,25 @@ export const App = () => {
   return (
     <div className="relative">
       <Header submitCallback={updateCurrentPokemon} />
-      <Switch>
-        <Route exact path="/info">
-          <BasicInfo name={name} id={id} types={types} />
-        </Route>
-        <Route exact path="/moves">
-          <Moves moves={moves} />
-        </Route>
-        <Route exact path="/">
-          <Pokemon pokemon={currentPokemon} />
-        </Route>
-        <Route exact path="/locations">
-          <Pokemon pokemon={currentPokemon} />
-        </Route>
-        <Route>
-          <h1>404</h1>
-        </Route>
-      </Switch>
-      <Footer />
+      <Page>
+        <Switch>
+          <Route exact path="/info">
+            <BasicInfo name={name} id={id} types={types} />
+          </Route>
+          <Route exact path="/moves">
+            <Moves moves={moves} />
+          </Route>
+          <Route exact path="/">
+            <Pokemon pokemon={currentPokemon} />
+          </Route>
+          <Route exact path="/locations">
+            <Pokemon pokemon={currentPokemon} />
+          </Route>
+          <Route>
+            <h1>404</h1>
+          </Route>
+        </Switch>
+      </Page>
     </div>
   )
 }

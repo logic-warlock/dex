@@ -1,3 +1,4 @@
 {
-  "extends": ["@logic-warlock", "@logic-warlock/react"]
+  "extends": ["@logic-warlock", "@logic-warlock/react"],
+  "parser": "babel-eslint"
 }

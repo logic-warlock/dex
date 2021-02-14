@@ -12,10 +12,12 @@ import { Search } from './Search'
 export const Header = ({ submitCallback }) => {
   return (
     <React.Fragment>
-      <div className="flex flex-wrap justify-between items-center p-2 border-b border-black shadow bg-purple-400 fixed w-full">
-        <p className="uppercase text-lg">Warlock Dex</p>
-        <div>
-          <Search submitCallback={submitCallback} />
+      <div className="border-b border-black shadow bg-red-400 w-full fixed">
+        <div className="max-w-screen-lg m-auto flex flex-wrap justify-between items-center py-2">
+          <p className="uppercase text-lg font-bold">Warlock Dex</p>
+          <div>
+            <Search submitCallback={submitCallback} />
+          </div>
         </div>
       </div>
       <div className="pt-20" />

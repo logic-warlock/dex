@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 export const Footer = () => {
   return (
     <React.Fragment>
-      <div className="p-2 border-b border-black shadow bg-purple-400 fixed bottom-0 w-full">
+      <div className="p-2 border-b border-black shadow bg-red-400 fixed bottom-0 w-full">
         <ul className="flex justify-between items-center">
           <li>
             <Link to="/info">Info</Link>

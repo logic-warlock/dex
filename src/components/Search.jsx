@@ -40,11 +40,11 @@ export const Search = ({ submitCallback }) => {
   return (
     <form onSubmit={handleSubmit} className="flex">
       <input
-        className="flex-1 appearance-none border border-transparent w-full py-1 px-2 bg-white text-gray-700 placeholder-gray-400 rounded text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+        className="flex-1 appearance-none border border-transparent w-96 py-1 px-2 bg-white text-gray-700 placeholder-gray-400 rounded text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent mr-4"
         type="text"
         id="name"
         value={query}
-        placeholder="Deoxys"
+        placeholder="Search for a mon..."
         onChange={handleChange}
       />
       <button type="submit">
