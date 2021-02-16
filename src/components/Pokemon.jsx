@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Stats } from './pokemon'
 
 /**
  * Pokemon (plural) component
@@ -11,7 +12,7 @@ import PropTypes from 'prop-types'
 export const Pokemon = ({ pokemon }) => {
   console.dir(pokemon)
 
-  const { abilities, height, heldItems, sprites, stats, name, id, types } = pokemon
+  const { height, heldItems, sprites, stats, name, id, types } = pokemon
 
   const officialArt = sprites?.other?.officialArtwork?.frontDefault
 
@@ -21,7 +22,7 @@ export const Pokemon = ({ pokemon }) => {
         <div className="col-span-2 flex-column">
           <p className="text-3xl font-bold uppercase">#{id}</p>
           <p className="text-4xl font-bold uppercase">{name}</p>
-          <div className="flex">
+          <div className="flex my-4">
             {(types || []).map(({ type }) => (
               <div
                 className={`uppercase bg-white rounded-full px-4 w-${
@@ -32,19 +33,15 @@ export const Pokemon = ({ pokemon }) => {
               </div>
             ))}
           </div>
+          <div className="my-4">
+            <Stats stats={stats} />
+          </div>
         </div>
         <figure className="w-80 h-80 bg-white shadow-md border border-black rounded justify-self-end">
           <img className="w-full h-full" src={officialArt} alt={`Official Artwork for ${name}`} />
         </figure>
       </div>
       <p>Height: {height || 'Unknown'}</p>
-      {!!(stats || []).length &&
-        stats.map(({ baseStat, effort, stat }) => (
-          <div key={`${baseStat}/${effort}/${stat}`}>
-            <h5>{stat?.name}</h5>
-            <p>{baseStat}</p>
-          </div>
-        ))}
       {!!(Object.entries(sprites || {}) || []).length && (
         <div>
           {Object.entries(sprites || {}).map(
@@ -67,19 +64,6 @@ export const Pokemon = ({ pokemon }) => {
               <h5>{item?.name}</h5>
               <p>{versionDetails?.rarity}</p>
               <p>{versionDetails?.name}</p>
-            </div>
-          ))}
-        </div>
-      )}
-      {!!(abilities || []).length && (
-        <div>
-          <h4>Abilities!</h4>
-          {abilities.map((abilityStat) => (
-            <div key={abilityStat?.ability?.name}>
-              <h5>
-                {abilityStat.ability?.name}
-                {abilityStat?.is_hidden && ` (Hidden)`}
-              </h5>
             </div>
           ))}
         </div>
